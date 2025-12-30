@@ -1,11 +1,36 @@
+import { useState } from "react";
 import properties from "./properties.json";
 
 function App() {
+  const [searchType, setSearchType] = useState("any");
+
   return (
     <div style={{ padding: "20px" }}>
       <h1>Estate Agent App</h1>
 
-      {properties.map((property) => (
+      <h2>Search Properties</h2>
+
+      <label>
+        Property Type:{""}
+        <select
+          style={{margineLeft: "10px"}}
+          value={searchType}
+          onChange={(e) => setSearchType(e.target.value)}
+        >
+          <option value="any">Any</option>
+          <option value="house">House</option>
+          <option value="flat">Flat</option>
+        </select>
+      </label>
+
+      <hr />
+
+      {properties
+        .filter((property) =>
+          searchType === "any" ? true : property.type === searchType
+        )
+        .map((property) => (
+
         <div
           key={property.id}
           style={{
