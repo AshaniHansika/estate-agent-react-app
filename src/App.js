@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import properties from "./properties.json";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div style={{ padding: "20px" }}>
+      <h1>Estate Agent App</h1>
+
+      {properties.map((property) => (
+        <div
+          key={property.id}
+          style={{
+            border: "1px solid #ccc",
+            marginBottom: "15px",
+            padding: "10px",
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <h3>{property.title}</h3>
+          <p>{property.shortDescription}</p>
+          <p>Type: {property.type}</p>
+          <p>Price: £{property.price}</p>
+          <p>Bedrooms: {property.bedrooms}</p>
+          <p>Postcode: {property.postcode}</p>
+        </div>
+      ))}
     </div>
   );
 }
