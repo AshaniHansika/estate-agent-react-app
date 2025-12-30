@@ -11,7 +11,7 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+}  
 
 .App-header {
   background-color: #282c34;
@@ -35,4 +35,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+.property-card {
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.property-card img {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  margin-top: 10px;
+  border-radius: 5px;
 }
