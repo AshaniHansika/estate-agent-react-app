@@ -7,6 +7,7 @@ function App() {
   const [searchType, setSearchType] = useState("any");
   const [searchBedrooms, setSearchBedrooms] = useState("any");
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+  const [favourites, setFavourites] = useState([]);
 
   // If a property is selected, show the Property Page
   if (selectedPropertyId) {
@@ -18,7 +19,6 @@ function App() {
     );
   }
 
-  // Otherwise, show the search page
   return (
     <div style={{ padding: "20px" }}>
       <h1>Estate Agent App</h1>
@@ -58,7 +58,27 @@ function App() {
 
       <hr />
 
-      {/* Filter & Display Properties */}
+      {/* 🔵 FAVOURITES SECTION */}
+      <h2>Favourites</h2>
+
+      {favourites.length === 0 && <p>No favourites yet.</p>}
+
+      {favourites.map((fav) => (
+        <div key={fav.id} className="property-card">
+          <h4>{fav.title}</h4>
+          <button
+            onClick={() =>
+              setFavourites(favourites.filter((f) => f.id !== fav.id))
+            }
+          >
+            Remove
+          </button>
+        </div>
+      ))}
+
+      <hr />
+
+      {/* 🔵 SEARCH RESULTS */}
       {properties
         .filter((p) => (searchType === "any" ? true : p.type === searchType))
         .filter((p) =>
@@ -75,6 +95,17 @@ function App() {
             onClick={() => setSelectedPropertyId(property.id)}
             style={{ cursor: "pointer" }}
           >
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                if (!favourites.find((f) => f.id === property.id)) {
+                  setFavourites([...favourites, property]);
+                }
+              }}
+            >
+              Add to Favourites
+            </button>
+
             <h3>{property.title}</h3>
             <p>{property.shortDescription}</p>
             <p>Type: {property.type}</p>
@@ -82,11 +113,9 @@ function App() {
             <p>Bedrooms: {property.bedrooms}</p>
             <p>Postcode: {property.postcode}</p>
             <p>Date Added: {property.dateAdded}</p>
+
             {property.images.length > 0 && (
-              <img
-                src={property.images[0]}
-                alt={property.title}
-              />
+              <img src={property.images[0]} alt={property.title} />
             )}
           </div>
         ))}
