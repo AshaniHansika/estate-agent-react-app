@@ -1,11 +1,24 @@
 import { useState } from "react";
 import properties from "./properties.json";
+import PropertyPage from "./PropertyPage";
 import "./App.css";
 
 function App() {
   const [searchType, setSearchType] = useState("any");
   const [searchBedrooms, setSearchBedrooms] = useState("any");
+  const [selectedPropertyId, setSelectedPropertyId] = useState(null);
 
+  // If a property is selected, show the Property Page
+  if (selectedPropertyId) {
+    return (
+      <PropertyPage
+        propertyId={selectedPropertyId}
+        onBack={() => setSelectedPropertyId(null)}
+      />
+    );
+  }
+
+  // Otherwise, show the search page
   return (
     <div style={{ padding: "20px" }}>
       <h1>Estate Agent App</h1>
@@ -56,7 +69,12 @@ function App() {
             : p.bedrooms === Number(searchBedrooms)
         )
         .map((property) => (
-          <div key={property.id} className="property-card">
+          <div
+            key={property.id}
+            className="property-card"
+            onClick={() => setSelectedPropertyId(property.id)}
+            style={{ cursor: "pointer" }}
+          >
             <h3>{property.title}</h3>
             <p>{property.shortDescription}</p>
             <p>Type: {property.type}</p>
