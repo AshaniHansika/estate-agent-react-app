@@ -1,3 +1,7 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -51,4 +55,24 @@
   object-fit: cover;
   margin-top: 10px;
   border-radius: 5px;
+}
+.favourites-zone {
+  margin-bottom: 20px;
+}
+
+/* ---------- MOBILE / SMALL SCREEN ---------- */
+@media (max-width: 1024px) {
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .property-card {
+    font-size: 14px;
+  }
+}
+/* ---------- LARGE SCREEN LAYOUT ---------- */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
 }

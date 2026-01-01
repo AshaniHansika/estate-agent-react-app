@@ -10,9 +10,9 @@ const ITEM_TYPE = "PROPERTY";
 function PropertyCard({ property, onOpen, onAddFavourite }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ITEM_TYPE,
-    item: { property },
+    item: property,
     collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
+      isDragging: monitor.isDragging(),
     }),
   }));
 
@@ -25,24 +25,21 @@ function PropertyCard({ property, onOpen, onAddFavourite }) {
         cursor: "grab",
       }}
     >
-      {/* ADD TO FAVOURITES BUTTON */}
       <button
         onClick={(e) => {
-          e.stopPropagation(); // Prevent triggering onOpen
+          e.stopPropagation();
           onAddFavourite(property);
         }}
-        style={{ marginBottom: "10px" }}
       >
         Add to Favourites
       </button>
 
-      {/* VIEW DETAILS BUTTON */}
       <button
         onClick={(e) => {
-          e.stopPropagation(); // Prevent accidental drag click
+          e.stopPropagation();
           onOpen();
         }}
-        style={{ marginBottom: "10px", marginLeft: "10px" }}
+        style={{ marginLeft: "10px" }}
       >
         View Details
       </button>
@@ -70,17 +67,16 @@ function App() {
   /* -------- DROP TARGET (FAVOURITES) -------- */
   const [{ isOver }, drop] = useDrop(() => ({
     accept: ITEM_TYPE,
-    drop: (item) => {
-      if (!favourites.find((f) => f.id === item.property.id)) {
-        setFavourites([...favourites, item.property]);
+    drop: (property) => {
+      if (!favourites.find((f) => f.id === property.id)) {
+        setFavourites([...favourites, property]);
       }
     },
     collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
+      isOver: monitor.isOver(),
     }),
   }));
 
-  // Property page
   if (selectedPropertyId) {
     return (
       <PropertyPage
@@ -96,13 +92,12 @@ function App() {
 
       <h2>Search Properties</h2>
 
-      {/* TYPE FILTER */}
       <label>
         Type:
         <select
-          style={{ marginLeft: "10px", marginRight: "20px" }}
           value={searchType}
           onChange={(e) => setSearchType(e.target.value)}
+          style={{ marginLeft: "10px", marginRight: "20px" }}
         >
           <option value="any">Any</option>
           <option value="house">House</option>
@@ -110,13 +105,12 @@ function App() {
         </select>
       </label>
 
-      {/* BEDROOM FILTER */}
       <label>
         Bedrooms:
         <select
-          style={{ marginLeft: "10px" }}
           value={searchBedrooms}
           onChange={(e) => setSearchBedrooms(e.target.value)}
+          style={{ marginLeft: "10px" }}
         >
           <option value="any">Any</option>
           <option value="1">1</option>
@@ -129,16 +123,16 @@ function App() {
 
       <hr />
 
-      {/* ⭐ FAVOURITES (DROP ZONE) */}
+      {/* ⭐ FAVOURITES DROP ZONE */}
       <div
         ref={drop}
         style={{
           padding: "15px",
           border: "2px dashed #aaa",
-          backgroundColor: isOver ? "#f0f8ff" : "#fafafa",
+          backgroundColor: isOver ? "#e6f7ff" : "#fafafa",
         }}
       >
-        <h2>Favourites</h2>
+        <h2>Favourites (Drop Here)</h2>
 
         {favourites.length === 0 && <p>No favourites yet.</p>}
 
@@ -159,6 +153,7 @@ function App() {
       <hr />
 
       {/* 🔍 SEARCH RESULTS */}
+      <div className="results-grid">
       {properties
         .filter((p) => (searchType === "any" ? true : p.type === searchType))
         .filter((p) =>
@@ -180,6 +175,7 @@ function App() {
             }}
           />
         ))}
+      </div>
     </div>
   );
 }
