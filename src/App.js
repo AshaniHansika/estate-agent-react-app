@@ -1,15 +1,86 @@
 import { useState } from "react";
+import { useDrag, useDrop } from "react-dnd";
 import properties from "./properties.json";
 import PropertyPage from "./PropertyPage";
 import "./App.css";
 
+const ITEM_TYPE = "PROPERTY";
+
+/* ---------------- PROPERTY CARD (DRAG SOURCE) ---------------- */
+function PropertyCard({ property, onOpen, onAddFavourite }) {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: ITEM_TYPE,
+    item: { property },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+
+  return (
+    <div
+      ref={drag}
+      className="property-card"
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        cursor: "grab",
+      }}
+    >
+      {/* ADD TO FAVOURITES BUTTON */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent triggering onOpen
+          onAddFavourite(property);
+        }}
+        style={{ marginBottom: "10px" }}
+      >
+        Add to Favourites
+      </button>
+
+      {/* VIEW DETAILS BUTTON */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent accidental drag click
+          onOpen();
+        }}
+        style={{ marginBottom: "10px", marginLeft: "10px" }}
+      >
+        View Details
+      </button>
+
+      <h3>{property.title}</h3>
+      <p>{property.shortDescription}</p>
+      <p>Type: {property.type}</p>
+      <p>Price: £{property.price}</p>
+      <p>Bedrooms: {property.bedrooms}</p>
+
+      {property.images.length > 0 && (
+        <img src={property.images[0]} alt={property.title} />
+      )}
+    </div>
+  );
+}
+
+/* ---------------- MAIN APP ---------------- */
 function App() {
   const [searchType, setSearchType] = useState("any");
   const [searchBedrooms, setSearchBedrooms] = useState("any");
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
   const [favourites, setFavourites] = useState([]);
 
-  // If a property is selected, show the Property Page
+  /* -------- DROP TARGET (FAVOURITES) -------- */
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: ITEM_TYPE,
+    drop: (item) => {
+      if (!favourites.find((f) => f.id === item.property.id)) {
+        setFavourites([...favourites, item.property]);
+      }
+    },
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }));
+
+  // Property page
   if (selectedPropertyId) {
     return (
       <PropertyPage
@@ -25,9 +96,9 @@ function App() {
 
       <h2>Search Properties</h2>
 
-      {/* Property Type Filter */}
+      {/* TYPE FILTER */}
       <label>
-        Type:{" "}
+        Type:
         <select
           style={{ marginLeft: "10px", marginRight: "20px" }}
           value={searchType}
@@ -39,9 +110,9 @@ function App() {
         </select>
       </label>
 
-      {/* Bedrooms Filter */}
+      {/* BEDROOM FILTER */}
       <label>
-        Bedrooms:{" "}
+        Bedrooms:
         <select
           style={{ marginLeft: "10px" }}
           value={searchBedrooms}
@@ -58,27 +129,36 @@ function App() {
 
       <hr />
 
-      {/* 🔵 FAVOURITES SECTION */}
-      <h2>Favourites</h2>
+      {/* ⭐ FAVOURITES (DROP ZONE) */}
+      <div
+        ref={drop}
+        style={{
+          padding: "15px",
+          border: "2px dashed #aaa",
+          backgroundColor: isOver ? "#f0f8ff" : "#fafafa",
+        }}
+      >
+        <h2>Favourites</h2>
 
-      {favourites.length === 0 && <p>No favourites yet.</p>}
+        {favourites.length === 0 && <p>No favourites yet.</p>}
 
-      {favourites.map((fav) => (
-        <div key={fav.id} className="property-card">
-          <h4>{fav.title}</h4>
-          <button
-            onClick={() =>
-              setFavourites(favourites.filter((f) => f.id !== fav.id))
-            }
-          >
-            Remove
-          </button>
-        </div>
-      ))}
+        {favourites.map((fav) => (
+          <div key={fav.id} className="property-card">
+            <h4>{fav.title}</h4>
+            <button
+              onClick={() =>
+                setFavourites(favourites.filter((f) => f.id !== fav.id))
+              }
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+      </div>
 
       <hr />
 
-      {/* 🔵 SEARCH RESULTS */}
+      {/* 🔍 SEARCH RESULTS */}
       {properties
         .filter((p) => (searchType === "any" ? true : p.type === searchType))
         .filter((p) =>
@@ -89,35 +169,16 @@ function App() {
             : p.bedrooms === Number(searchBedrooms)
         )
         .map((property) => (
-          <div
+          <PropertyCard
             key={property.id}
-            className="property-card"
-            onClick={() => setSelectedPropertyId(property.id)}
-            style={{ cursor: "pointer" }}
-          >
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                if (!favourites.find((f) => f.id === property.id)) {
-                  setFavourites([...favourites, property]);
-                }
-              }}
-            >
-              Add to Favourites
-            </button>
-
-            <h3>{property.title}</h3>
-            <p>{property.shortDescription}</p>
-            <p>Type: {property.type}</p>
-            <p>Price: £{property.price}</p>
-            <p>Bedrooms: {property.bedrooms}</p>
-            <p>Postcode: {property.postcode}</p>
-            <p>Date Added: {property.dateAdded}</p>
-
-            {property.images.length > 0 && (
-              <img src={property.images[0]} alt={property.title} />
-            )}
-          </div>
+            property={property}
+            onOpen={() => setSelectedPropertyId(property.id)}
+            onAddFavourite={(prop) => {
+              if (!favourites.find((f) => f.id === prop.id)) {
+                setFavourites([...favourites, prop]);
+              }
+            }}
+          />
         ))}
     </div>
   );
