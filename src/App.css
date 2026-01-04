@@ -19,12 +19,14 @@ h2 {
 
 /* ---------- FORM INPUTS ---------- */
 form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 25px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 0 auto 25px auto;  /* <-- centers form horizontally */
+  max-width: 720px;           /* keeps form from stretching too wide */
 }
 
+/* All inputs & selects */
 form select,
 form input {
   padding: 8px 10px;
@@ -32,16 +34,31 @@ form input {
   border: 1px solid #ccc;
   outline: none;
   font-size: 14px;
-  min-width: 120px;
   transition: border 0.2s;
   background-color: #e5e6d8;
   color: #000000;
 }
 
+/* Focus */
 form input:focus,
 form select:focus {
   border-color: #000000;
 }
+
+/* ---------- FORM LAYOUT RULES ---------- */
+
+/* 1️⃣ Property type → full row */
+form select {
+  grid-column: 1 / -1;
+}
+
+/* 4️⃣ Dates + postcode on same row */
+form input[type="date"],
+form input.postcode {
+  grid-column: span 1;
+}
+
+
 
 /* ---------- RESULTS GRID (3 → 2 → 1) ---------- */
 .results-grid {
