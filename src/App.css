@@ -8,26 +8,21 @@ body {
   font-size: 16px;
 }
 
-h1 {
+h1, h2 {
   color: #664E44;
   margin-bottom: 15px;
   text-align: center;
 }
-h2 {
-  color: #664E44;
-  margin-bottom: 15px;
-}
 
-/* ---------- FORM INPUTS ---------- */
+/* ---------- FORM ---------- */
 form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  margin: 0 auto 25px auto;  /* <-- centers form horizontally */
-  max-width: 720px;           /* keeps form from stretching too wide */
+  margin: 0 auto 25px auto; /* center horizontally */
+  max-width: 720px;
 }
 
-/* All inputs & selects */
 form select,
 form input {
   padding: 8px 10px;
@@ -40,28 +35,23 @@ form input {
   color: #000000;
 }
 
-/* Focus */
 form input:focus,
 form select:focus {
   border-color: #000000;
 }
 
-/* ---------- FORM LAYOUT RULES ---------- */
-
-/* 1️⃣ Property type → full row */
+/* Property type full row */
 form select {
   grid-column: 1 / -1;
 }
 
-/* 4️⃣ Dates + postcode on same row */
+/* Dates + postcode can share row */
 form input[type="date"],
 form input.postcode {
   grid-column: span 1;
 }
 
-
-
-/* ---------- RESULTS GRID (3 → 2 → 1) ---------- */
+/* ---------- RESULTS GRID ---------- */
 .results-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -96,7 +86,7 @@ form input.postcode {
   font-size: 14px;
 }
 
-/* ---------- PROPERTY IMAGE ---------- */
+/* Property images */
 .property-card img {
   width: 100%;
   height: 260px;
@@ -105,8 +95,7 @@ form input.postcode {
   border-radius: 8px;
 }
 
-
-/* ---------- DRAG HANDLE ---------- */
+/* Drag handle */
 .property-card > div[ref] {
   font-size: 13px;
   font-weight: 500;
@@ -125,7 +114,7 @@ form input.postcode {
   background-color: #dcb6b0;
 }
 
-/* ---------- ADD TO FAVOURITES BUTTON ---------- */
+/* Add to favourites button */
 .property-card button {
   margin-top: auto;
   margin-right: 8px;
@@ -178,6 +167,7 @@ form input.postcode {
   margin-top: 10px;
 }
 
+/* Thumbnails */
 .property-page .thumbnails {
   display: flex;
   flex-wrap: wrap;
@@ -196,10 +186,10 @@ form input.postcode {
 }
 
 .property-page .thumbnails img.selected {
-  border: 2px solid #000000;
+  border: 2px solid #007bff;
 }
 
-/* ---------- TABS ---------- */
+/* Tabs */
 .tabs button {
   margin-right: 10px;
   padding: 6px 12px;
@@ -213,17 +203,17 @@ form input.postcode {
 }
 
 .tabs button.active {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #007bff;
+  color: #fff;
 }
 
-/* ---------- TAB CONTENT ---------- */
+/* Tab content */
 .tab-content {
   margin-top: 15px;
   border: 1px solid #ccc;
   padding: 12px;
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: #fff;
   color: #000000;
 }
 

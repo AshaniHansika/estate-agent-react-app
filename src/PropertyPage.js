@@ -4,8 +4,8 @@ import "./App.css";
 
 function PropertyPage({ propertyId, onBack }) {
   const property = properties.find((p) => p.id === propertyId);
-  const [mainImage, setMainImage] = useState(property.images[0]);
-  const [activeTab, setActiveTab] = useState("details"); // "details", "floorplan", "map"
+  const [mainImage, setMainImage] = useState(property?.images[0] || "");
+  const [activeTab, setActiveTab] = useState("details"); // tabs: details, floorplan, map
 
   if (!property) return <div>Property not found</div>;
 
@@ -23,78 +23,107 @@ function PropertyPage({ propertyId, onBack }) {
       <p>Date Added: {property.dateAdded}</p>
 
       {/* Main Image */}
-      <img
-        src={mainImage}
-        alt={property.title}
-        style={{ width: "600px", height: "400px", objectFit: "cover", marginTop: "10px" }}
-      />
+      {mainImage && (
+        <img
+          src={mainImage}
+          alt={property.title}
+          style={{
+            width: "600px",
+            maxWidth: "100%",
+            height: "400px",
+            objectFit: "cover",
+            marginTop: "10px",
+            borderRadius: "8px",
+          }}
+        />
+      )}
 
       {/* Thumbnails */}
-      <div style={{ display: "flex", marginTop: "10px", flexWrap: "wrap" }}>
-        {property.images.map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            alt={`${property.title} ${index}`}
+      {property.images && property.images.length > 0 && (
+        <div className="thumbnails">
+          {property.images.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`${property.title} ${index + 1}`}
+              className={mainImage === img ? "selected" : ""}
+              onClick={() => setMainImage(img)}
+              style={{
+                cursor: "pointer",
+                width: "100px",
+                height: "75px",
+                objectFit: "cover",
+                marginRight: "10px",
+                marginTop: "10px",
+                border: mainImage === img ? "2px solid #007bff" : "1px solid #ccc",
+                borderRadius: "5px",
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Tabs */}
+      <div className="tabs" style={{ marginTop: "20px" }}>
+        {["details", "floorplan", "map"].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={activeTab === tab ? "active" : ""}
             style={{
-              width: "100px",
-              height: "75px",
-              objectFit: "cover",
               marginRight: "10px",
-              marginBottom: "10px",
+              padding: "6px 12px",
+              borderRadius: "5px",
+              border: "none",
               cursor: "pointer",
-              border: mainImage === img ? "2px solid #007bff" : "1px solid #ccc",
+              fontSize: "14px",
+              backgroundColor: activeTab === tab ? "#007bff" : "#ccc",
+              color: activeTab === tab ? "#fff" : "#000",
             }}
-            onClick={() => setMainImage(img)}
-          />
+          >
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          </button>
         ))}
       </div>
 
-      {/* Tabs */}
-      <div style={{ marginTop: "20px" }}>
-        <button
-          onClick={() => setActiveTab("details")}
-          style={{
-            marginRight: "10px",
-            backgroundColor: activeTab === "details" ? "#007bff" : "#ccc",
-            color: activeTab === "details" ? "#fff" : "#000",
-          }}
-        >
-          Details
-        </button>
-        <button
-          onClick={() => setActiveTab("floorplan")}
-          style={{
-            marginRight: "10px",
-            backgroundColor: activeTab === "floorplan" ? "#007bff" : "#ccc",
-            color: activeTab === "floorplan" ? "#fff" : "#000",
-          }}
-        >
-          Floor Plan
-        </button>
-        <button
-          onClick={() => setActiveTab("map")}
-          style={{
-            backgroundColor: activeTab === "map" ? "#007bff" : "#ccc",
-            color: activeTab === "map" ? "#fff" : "#000",
-          }}
-        >
-          Map
-        </button>
-      </div>
-
       {/* Tab Content */}
-      <div style={{ marginTop: "15px", border: "1px solid #ccc", padding: "10px" }}>
+      <div
+        className="tab-content"
+        style={{
+          marginTop: "15px",
+          border: "1px solid #ccc",
+          padding: "12px",
+          borderRadius: "8px",
+          backgroundColor: "#fff",
+        }}
+      >
         {activeTab === "details" && <p>{property.shortDescription}</p>}
-        {activeTab === "floorplan" && <p>Floor Plan will be shown here (replace with image or diagram).</p>}
+
+        {activeTab === "floorplan" && property.floorPlan && (
+          <img
+            src={property.floorPlan}
+            alt={`${property.title} Floor Plan`}
+            style={{
+              width: "100%",
+              maxWidth: "600px",
+              height: "auto",
+              borderRadius: "8px",
+              marginTop: "10px",
+              objectFit: "contain",
+            }}
+          />
+        )}
+
         {activeTab === "map" && (
           <iframe
             title="Google Map"
-            src={`https://www.google.com/maps?q=${property.postcode}&output=embed`}
+            src={`https://www.google.com/maps?q=${encodeURIComponent(
+              property.postcode + " " + property.title
+            )}&output=embed`}
             width="100%"
-            height="300"
-            style={{ border: 0 }}
-            allowFullScreen=""
+            height="400"
+            style={{ border: 0, borderRadius: "8px" }}
+            allowFullScreen
             loading="lazy"
           ></iframe>
         )}
