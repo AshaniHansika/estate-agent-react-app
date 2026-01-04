@@ -3,11 +3,16 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #ffffff;
+  background-color: #f4f0ea;
   color: #000000;
 }
 
-h1, h2 {
+h1 {
+  color: #664E44;
+  margin-bottom: 15px;
+  text-align: center;
+}
+h2 {
   color: #664E44;
   margin-bottom: 15px;
 }
@@ -38,8 +43,19 @@ form select:focus {
   border-color: #000000;
 }
 
+/* ---------- RESULTS GRID (3 → 2 → 1) ---------- */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 24px 0;
+}
+
 /* ---------- PROPERTY CARD ---------- */
 .property-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   border: 1px solid #ddd;
   padding: 12px;
   border-radius: 10px;
@@ -59,18 +75,18 @@ form select:focus {
 .property-card h4,
 .property-card p {
   margin: 5px 0;
-  color: #000000;
   font-size: 14px;
 }
 
+/* ---------- PROPERTY IMAGE ---------- */
 .property-card img {
   width: 100%;
-  max-width: 250px;
-  height: 160px;
+  height: 260px;
   object-fit: cover;
   margin-top: 10px;
   border-radius: 8px;
 }
+
 
 /* ---------- DRAG HANDLE ---------- */
 .property-card > div[ref] {
@@ -93,6 +109,7 @@ form select:focus {
 
 /* ---------- ADD TO FAVOURITES BUTTON ---------- */
 .property-card button {
+  margin-top: auto;
   margin-right: 8px;
   margin-bottom: 6px;
   padding: 6px 12px;
@@ -116,13 +133,6 @@ form select:focus {
 
 .property-card button:hover:not(:disabled) {
   background-color: #bdb0a1;
-}
-
-/* ---------- RESULTS GRID ---------- */
-.results-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
 }
 
 /* ---------- FAVOURITES ZONE ---------- */
@@ -204,20 +214,11 @@ form select:focus {
   .results-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .property-card img {
-    max-width: 200px;
-    height: 130px;
-  }
 }
 
 @media (max-width: 600px) {
   .results-grid {
     grid-template-columns: 1fr;
-  }
-
-  .property-card {
-    font-size: 14px;
   }
 
   form {
