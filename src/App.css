@@ -5,7 +5,15 @@ body {
   padding: 0;
   background-color: #f4f0ea;
   color: #000000;
-  font-size: 16px;
+  font-size: 18px; /* ⬆ increased from 16px */
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 26px;
 }
 
 h1, h2 {
@@ -18,18 +26,18 @@ h1, h2 {
 form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin: 0 auto 25px auto; /* center horizontally */
+  gap: 14px;
+  margin: 0 auto 25px auto;
   max-width: 720px;
 }
 
 form select,
 form input {
-  padding: 8px 10px;
-  border-radius: 5px;
+  padding: 10px 12px;
+  border-radius: 6px;
   border: 1px solid #ccc;
   outline: none;
-  font-size: 14px;
+  font-size: 16px; /* ⬆ increased */
   transition: border 0.2s;
   background-color: #e5e6d8;
   color: #000000;
@@ -40,23 +48,16 @@ form select:focus {
   border-color: #000000;
 }
 
-/* Property type full row */
 form select {
   grid-column: 1 / -1;
-}
-
-/* Dates + postcode can share row */
-form input[type="date"],
-form input.postcode {
-  grid-column: span 1;
 }
 
 /* ---------- RESULTS GRID ---------- */
 .results-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  padding: 24px 0;
+  gap: 26px;
+  padding: 26px 0;
 }
 
 /* ---------- PROPERTY CARD ---------- */
@@ -65,25 +66,32 @@ form input.postcode {
   flex-direction: column;
   height: 100%;
   border: 1px solid #ddd;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 16px;
+  border-radius: 12px;
   background-color: #f0e3d3;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-  text-align: left;
   transition: transform 0.2s, box-shadow 0.2s;
   color: #000000;
 }
 
 .property-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-.property-card h3,
-.property-card h4,
+.property-card h3 {
+  font-size: 20px;
+  margin: 6px 0;
+}
+
+.property-card h4 {
+  font-size: 18px;
+  margin: 6px 0;
+}
+
 .property-card p {
-  margin: 5px 0;
-  font-size: 14px;
+  font-size: 16px;
+  margin: 6px 0;
 }
 
 /* Property images */
@@ -91,50 +99,34 @@ form input.postcode {
   width: 100%;
   height: 260px;
   object-fit: cover;
-  margin-top: 10px;
-  border-radius: 8px;
+  margin-top: 12px;
+  border-radius: 10px;
 }
 
 /* Drag handle */
 .property-card > div[ref] {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
   text-align: center;
-  padding: 6px;
+  padding: 8px;
   border: 1px dashed #aaa;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
   background-color: #eacdc7;
   cursor: grab;
-  color: #000000;
-  transition: background-color 0.2s;
 }
 
-.property-card > div[ref]:hover {
-  background-color: #dcb6b0;
-}
-
-/* Add to favourites button */
+/* Buttons */
 .property-card button {
   margin-top: auto;
   margin-right: 8px;
   margin-bottom: 6px;
-  padding: 6px 12px;
+  padding: 10px 16px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: bold;
-  color: #000000;
-  transition: background-color 0.2s;
-}
-
-.property-card button:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
-}
-
-.property-card button:not(:disabled) {
   background-color: #cfc1b4;
 }
 
@@ -142,64 +134,68 @@ form input.postcode {
   background-color: #bdb0a1;
 }
 
+.property-card button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
 /* ---------- FAVOURITES ZONE ---------- */
 .favourites-zone {
-  min-height: 100px;
-  padding: 15px;
-  border-radius: 10px;
+  min-height: 120px;
+  padding: 20px;
+  border-radius: 12px;
   margin-bottom: 25px;
   border: 2px dashed #cfc1b4;
   background-color: #cfc1b4;
-  color: #000000;
 }
 
 .favourites-zone h2 {
-  margin-top: 0;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 /* ---------- PROPERTY PAGE ---------- */
+.property-page {
+  font-size: 17px;
+}
+
 .property-page img {
   width: 100%;
-  max-width: 600px;
+  max-width: 650px;
   height: auto;
-  border-radius: 8px;
-  margin-top: 10px;
+  border-radius: 10px;
+  margin-top: 12px;
 }
 
 /* Thumbnails */
 .property-page .thumbnails {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .property-page .thumbnails img {
-  width: 100px;
-  height: 75px;
+  width: 110px;
+  height: 80px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 6px;
   border: 1px solid #ccc;
   cursor: pointer;
-  transition: border 0.2s;
 }
 
 .property-page .thumbnails img.selected {
-  border: 2px solid #007bff;
+  border: 3px solid #007bff;
 }
 
 /* Tabs */
 .tabs button {
   margin-right: 10px;
-  padding: 6px 12px;
+  padding: 10px 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   background-color: #ccc;
-  color: #000;
-  transition: background-color 0.2s;
 }
 
 .tabs button.active {
@@ -209,12 +205,12 @@ form input.postcode {
 
 /* Tab content */
 .tab-content {
-  margin-top: 15px;
+  margin-top: 18px;
   border: 1px solid #ccc;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 18px;
+  border-radius: 10px;
   background-color: #fff;
-  color: #000000;
+  font-size: 16px;
 }
 
 /* ---------- RESPONSIVE ---------- */
@@ -225,11 +221,11 @@ form input.postcode {
 }
 
 @media (max-width: 600px) {
-  .results-grid {
-    grid-template-columns: 1fr;
+  body {
+    font-size: 17px;
   }
 
-  form {
-    flex-direction: column;
+  .results-grid {
+    grid-template-columns: 1fr;
   }
 }

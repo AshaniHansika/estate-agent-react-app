@@ -6,6 +6,8 @@
     "bedrooms": 3,
     "dateAdded": "2024-11-10",
     "postcode": "NW1",
+    "lat": 51.5370,
+    "lng": -0.1430,
     "title": "3 Bedroom Family House",
     "shortDescription": "A warm and welcoming family home featuring three spacious bedrooms, a bright living area, and a private garden. Ideal for families looking for comfort, space, and a peaceful residential vibe.",
     "images": [
@@ -26,6 +28,8 @@
     "bedrooms": 2,
     "dateAdded": "2024-10-02",
     "postcode": "BR1",
+    "lat": 51.4050,
+    "lng": 0.0150,
     "title": "Modern 2 Bedroom Flat",
     "shortDescription": "A stylish and modern two-bedroom flat with an open-plan layout and excellent access to public transport. Perfect for professionals or small families who enjoy a contemporary urban lifestyle.",
     "images": [
@@ -46,6 +50,8 @@
     "bedrooms": 4,
     "dateAdded": "2024-09-18",
     "postcode": "SE5",
+    "lat": 51.4690,
+    "lng": -0.0930,
     "title": "4 Bedroom Detached House",
     "shortDescription": "A large detached house offering four generous bedrooms, multiple living spaces, and a calm, quiet atmosphere. Ideal for growing families who value privacy and space.",
     "images": [
@@ -67,6 +73,8 @@
     "bedrooms": 3,
     "dateAdded": "2024-08-05",
     "postcode": "E1",
+    "lat": 51.5150,
+    "lng": -0.0650,
     "title": "3 Bedroom City Flat",
     "shortDescription": "A vibrant city flat with three bedrooms, located close to shops, cafés, and entertainment. Perfect for people who enjoy fast-paced city living with everything within walking distance.",
     "images": [
@@ -88,6 +96,8 @@
     "bedrooms": 5,
     "dateAdded": "2024-07-01",
     "postcode": "SW1",
+    "lat": 51.5010,
+    "lng": -0.1410,
     "title": "Luxury 5 Bedroom House",
     "shortDescription": "A high-end luxury home with five spacious bedrooms, modern interiors, and premium finishes throughout. Designed for comfort and elegance, offering an upscale and sophisticated lifestyle.",
     "images": [
@@ -109,6 +119,8 @@
     "bedrooms": 1,
     "dateAdded": "2024-06-15",
     "postcode": "CR0",
+    "lat": 51.3720,
+    "lng": -0.1010,
     "title": "1 Bedroom Studio Flat",
     "shortDescription": "A compact and cozy studio flat with smart use of space, ideal for students or single professionals. Offers a simple, low-maintenance living experience in a convenient location.",
     "images": [
@@ -129,6 +141,8 @@
     "bedrooms": 3,
     "dateAdded": "2024-05-20",
     "postcode": "HA1",
+    "lat": 51.5800,
+    "lng": -0.3350,
     "title": "3 Bedroom Semi-Detached House",
     "shortDescription": "A comfortable semi-detached home with three bedrooms, offering a balance of privacy and community living. Ideal for families seeking a calm neighbourhood with a friendly atmosphere.",
     "images": [
