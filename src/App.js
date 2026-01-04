@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import DatePicker from "react-widgets/DatePicker";
+import "react-widgets/styles.css"; // Required for React Widgets styling
 import properties from "./properties.json";
 import PropertyPage from "./PropertyPage";
 import "./App.css";
@@ -67,14 +69,14 @@ function PropertyCard({ property, onOpen, onAddFavourite, favourites }) {
 
 /* ---------------- MAIN APP ---------------- */
 function App() {
-  /* FILTER STATES (USED → NO WARNINGS) */
+  /* FILTER STATES */
   const [searchType, setSearchType] = useState("any");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [minBedrooms, setMinBedrooms] = useState("");
   const [maxBedrooms, setMaxBedrooms] = useState("");
-  const [dateFrom, setDateFrom] = useState("");
-  const [dateTo, setDateTo] = useState("");
+  const [dateFrom, setDateFrom] = useState(null);
+  const [dateTo, setDateTo] = useState(null);
   const [postcodeArea, setPostcodeArea] = useState("");
 
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
@@ -163,8 +165,19 @@ function App() {
           onChange={(e) => setMaxBedrooms(e.target.value)}
         />
 
-        <input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} />
-        <input type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)} />
+        {/* DATE PICKERS USING REACT WIDGETS */}
+        <div style={{ display: "flex", gap: "10px", marginTop: "10px", marginBottom: "10px" }}>
+          <DatePicker
+            placeholder="Start Date"
+            value={dateFrom}
+            onChange={setDateFrom}
+          />
+          <DatePicker
+            placeholder="End Date"
+            value={dateTo}
+            onChange={setDateTo}
+          />
+        </div>
 
         <input
           type="text"
