@@ -2,8 +2,8 @@
   "name": "estate-agent-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://AshaniHansika.github.io/estate-agent-app",
-  "dependencies": {
+  "homepage": "https://ashanihansika.github.io/estate-agent-react-app",
+ "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",

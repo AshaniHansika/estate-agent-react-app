@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import DatePicker from "react-widgets/DatePicker";
-import "react-widgets/styles.css"; // Required for React Widgets styling
+import "react-widgets/styles.css";
+
 import properties from "./properties.json";
 import PropertyPage from "./PropertyPage";
 import "./App.css";
 
+// Constant used by react-dnd to identify draggable items
 const ITEM_TYPE = "PROPERTY";
 
-/* ---------------- PROPERTY CARD ---------------- */
+/* ---------------- PROPERTY CARD COMPONENT ---------------- */
 function PropertyCard({ property, onOpen, onAddFavourite, favourites }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ITEM_TYPE,
@@ -23,10 +25,12 @@ function PropertyCard({ property, onOpen, onAddFavourite, favourites }) {
   return (
     <div
       className="property-card"
-      style={{ opacity: isDragging ? 0.5 : 1, cursor: "pointer" }}
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        cursor: "pointer",
+      }}
       onClick={() => onOpen(property.id)}
     >
-      {/* DRAG HANDLE */}
       <div
         ref={isAdded ? null : drag}
         onClick={(e) => e.stopPropagation()}
@@ -43,16 +47,17 @@ function PropertyCard({ property, onOpen, onAddFavourite, favourites }) {
         {isAdded ? "Already in Favourites" : "Drag to Favourites"}
       </div>
 
-      {/* BUTTON */}
-      <button
-        disabled={isAdded}
-        onClick={(e) => {
-          e.stopPropagation();
-          onAddFavourite(property);
-        }}
-      >
-        {isAdded ? "Added" : "Add to Favourites"}
-      </button>
+      <div className="button-group">
+        <button
+          disabled={isAdded}
+          onClick={(e) => {
+            e.stopPropagation();
+            onAddFavourite(property);
+          }}
+        >
+          {isAdded ? "Added" : "Add to Favourites"}
+        </button>
+      </div>
 
       <h3>{property.title}</h3>
       <p>{property.shortDescription}</p>
@@ -60,16 +65,19 @@ function PropertyCard({ property, onOpen, onAddFavourite, favourites }) {
       <p>Price: £{property.price}</p>
       <p>Bedrooms: {property.bedrooms}</p>
 
+      {/* Display first image using PUBLIC_URL */}
       {property.images.length > 0 && (
-        <img src={property.images[0]} alt={property.title} />
+        <img
+          src={process.env.PUBLIC_URL + "/" + property.images[0]}
+          alt={property.title}
+        />
       )}
     </div>
   );
 }
 
-/* ---------------- MAIN APP ---------------- */
+/* ---------------- MAIN APP COMPONENT ---------------- */
 function App() {
-  /* FILTER STATES */
   const [searchType, setSearchType] = useState("any");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
@@ -82,7 +90,6 @@ function App() {
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
   const [favourites, setFavourites] = useState([]);
 
-  /* DROP ZONE */
   const [{ isOver }, drop] = useDrop(() => ({
     accept: ITEM_TYPE,
     drop: (item) => {
@@ -97,27 +104,23 @@ function App() {
     }),
   }));
 
-  /* FILTER FUNCTION */
   const filterProperties = (property) => {
     if (searchType !== "any" && property.type !== searchType) return false;
     if (minBedrooms && property.bedrooms < Number(minBedrooms)) return false;
     if (maxBedrooms && property.bedrooms > Number(maxBedrooms)) return false;
     if (minPrice && property.price < Number(minPrice)) return false;
     if (maxPrice && property.price > Number(maxPrice)) return false;
-    if (dateFrom && new Date(property.dateAdded) < new Date(dateFrom)) return false;
+    if (dateFrom && new Date(property.dateAdded) < new Date(dateFrom))
+      return false;
     if (dateTo && new Date(property.dateAdded) > new Date(dateTo)) return false;
     if (
       postcodeArea &&
-      !property.postcode
-        .toUpperCase()
-        .startsWith(postcodeArea.toUpperCase())
+      !property.postcode.toUpperCase().startsWith(postcodeArea.toUpperCase())
     )
       return false;
-
     return true;
   };
 
-  /* PROPERTY PAGE */
   if (selectedPropertyId) {
     return (
       <PropertyPage
@@ -131,7 +134,6 @@ function App() {
     <div style={{ padding: "20px" }}>
       <h1>Estate Agent App</h1>
 
-      {/* SEARCH FORM */}
       <form style={{ marginBottom: "20px" }}>
         <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
           <option value="any">Any</option>
@@ -145,6 +147,7 @@ function App() {
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
         />
+
         <input
           type="number"
           placeholder="Max Price"
@@ -158,6 +161,7 @@ function App() {
           value={minBedrooms}
           onChange={(e) => setMinBedrooms(e.target.value)}
         />
+
         <input
           type="number"
           placeholder="Max Bedrooms"
@@ -165,18 +169,9 @@ function App() {
           onChange={(e) => setMaxBedrooms(e.target.value)}
         />
 
-        {/* DATE PICKERS USING REACT WIDGETS */}
-        <div style={{ display: "flex", gap: "10px", marginTop: "10px", marginBottom: "10px" }}>
-          <DatePicker
-            placeholder="Start Date"
-            value={dateFrom}
-            onChange={setDateFrom}
-          />
-          <DatePicker
-            placeholder="End Date"
-            value={dateTo}
-            onChange={setDateTo}
-          />
+        <div style={{ display: "flex", gap: "10px", margin: "10px 0" }}>
+          <DatePicker placeholder="Start Date" value={dateFrom} onChange={setDateFrom} />
+          <DatePicker placeholder="End Date" value={dateTo} onChange={setDateTo} />
         </div>
 
         <input
@@ -187,7 +182,6 @@ function App() {
         />
       </form>
 
-      {/* FAVOURITES */}
       <div
         ref={drop}
         className="favourites-zone"
@@ -199,15 +193,15 @@ function App() {
         }}
       >
         <h2>Favourites</h2>
+
         {favourites.length === 0 && <p>No favourites yet.</p>}
+
         {favourites.map((fav) => (
           <div key={fav.id} className="property-card">
             <h4>{fav.title}</h4>
             <button
               onClick={() =>
-                setFavourites((prev) =>
-                  prev.filter((f) => f.id !== fav.id)
-                )
+                setFavourites((prev) => prev.filter((f) => f.id !== fav.id))
               }
             >
               Remove
@@ -216,7 +210,6 @@ function App() {
         ))}
       </div>
 
-      {/* RESULTS */}
       <div className="results-grid">
         {properties.filter(filterProperties).map((property) => (
           <PropertyCard

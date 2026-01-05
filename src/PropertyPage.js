@@ -4,7 +4,11 @@ import "./App.css";
 
 function PropertyPage({ propertyId, onBack }) {
   const property = properties.find((p) => p.id === propertyId);
-  const [mainImage, setMainImage] = useState(property?.images[0] || "");
+  const [mainImage, setMainImage] = useState(
+    property?.images[0]
+      ? process.env.PUBLIC_URL + "/" + property.images[0]
+      : ""
+  );
   const [activeTab, setActiveTab] = useState("details");
 
   if (!property) return <div>Property not found</div>;
@@ -39,28 +43,31 @@ function PropertyPage({ propertyId, onBack }) {
 
       {property.images && property.images.length > 0 && (
         <div className="thumbnails">
-          {property.images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`${property.title} ${index + 1}`}
-              className={mainImage === img ? "selected" : ""}
-              onClick={() => setMainImage(img)}
-              style={{
-                cursor: "pointer",
-                width: "100px",
-                height: "75px",
-                objectFit: "cover",
-                marginRight: "10px",
-                marginTop: "10px",
-                border:
-                  mainImage === img
-                    ? "2px solid #007bff"
-                    : "1px solid #ccc",
-                borderRadius: "5px"
-              }}
-            />
-          ))}
+          {property.images.map((img, index) => {
+            const imgPath = process.env.PUBLIC_URL + "/" + img;
+            return (
+              <img
+                key={index}
+                src={imgPath}
+                alt={`${property.title} ${index + 1}`}
+                className={mainImage === imgPath ? "selected" : ""}
+                onClick={() => setMainImage(imgPath)}
+                style={{
+                  cursor: "pointer",
+                  width: "100px",
+                  height: "75px",
+                  objectFit: "cover",
+                  marginRight: "10px",
+                  marginTop: "10px",
+                  border:
+                    mainImage === imgPath
+                      ? "2px solid #007bff"
+                      : "1px solid #ccc",
+                  borderRadius: "5px"
+                }}
+              />
+            );
+          })}
         </div>
       )}
 
@@ -99,7 +106,7 @@ function PropertyPage({ propertyId, onBack }) {
 
         {activeTab === "floorplan" && property.floorPlan && (
           <img
-            src={property.floorPlan}
+            src={process.env.PUBLIC_URL + "/" + property.floorPlan}
             alt={`${property.title} Floor Plan`}
             style={{
               width: "100%",

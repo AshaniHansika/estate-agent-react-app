@@ -11,15 +11,15 @@
     "title": "3 Bedroom Family House",
     "shortDescription": "A warm and welcoming family home featuring three spacious bedrooms, a bright living area, and a private garden. Ideal for families looking for comfort, space, and a peaceful residential vibe.",
     "images": [
-      "/images/house1-1.jpeg",
-      "/images/house1-2.jpeg",
-      "/images/house1-3.jpeg",
-      "/images/house1-4.jpeg",
-      "/images/house1-5.jpeg",
-      "/images/house1-6.jpeg",
-      "/images/house1-7.jpeg"
+      "images/house1-1.jpeg",
+      "images/house1-2.jpeg",
+      "images/house1-3.jpeg",
+      "images/house1-4.jpeg",
+      "images/house1-5.jpeg",
+      "images/house1-6.jpeg",
+      "images/house1-7.jpeg"
     ],
-    "floorPlan": "/images/house1-floorplan.png"
+    "floorPlan": "images/house1-floorplan.png"
   },
   {
     "id": 2,
@@ -33,15 +33,15 @@
     "title": "Modern 2 Bedroom Flat",
     "shortDescription": "A stylish and modern two-bedroom flat with an open-plan layout and excellent access to public transport. Perfect for professionals or small families who enjoy a contemporary urban lifestyle.",
     "images": [
-      "/images/flat1-1.jpeg",
-      "/images/flat1-2.jpeg",
-      "/images/flat1-3.jpeg",
-      "/images/flat1-4.jpeg",
-      "/images/flat1-5.jpeg",
-      "/images/flat1-6.jpeg",
-      "/images/flat1-7.jpeg"
+      "images/flat1-1.jpeg",
+      "images/flat1-2.jpeg",
+      "images/flat1-3.jpeg",
+      "images/flat1-4.jpeg",
+      "images/flat1-5.jpeg",
+      "images/flat1-6.jpeg",
+      "images/flat1-7.jpeg"
     ],
-    "floorPlan": "/images/flat1-floorplan.png"
+    "floorPlan": "images/flat1-floorplan.png"
   },
   {
     "id": 3,
@@ -55,16 +55,16 @@
     "title": "4 Bedroom Detached House",
     "shortDescription": "A large detached house offering four generous bedrooms, multiple living spaces, and a calm, quiet atmosphere. Ideal for growing families who value privacy and space.",
     "images": [
-      "/images/house2-1.jpeg",
-      "/images/house2-2.jpg",
-      "/images/house2-3.jpg",
-      "/images/house2-4.jpg",
-      "/images/house2-5.jpg",
-      "/images/house2-6.jpg",
-      "/images/house2-7.jpg",
-      "/images/house2-8.jpg"
+      "images/house2-1.jpeg",
+      "images/house2-2.jpg",
+      "images/house2-3.jpg",
+      "images/house2-4.jpg",
+      "images/house2-5.jpg",
+      "images/house2-6.jpg",
+      "images/house2-7.jpg",
+      "images/house2-8.jpg"
     ],
-    "floorPlan": "/images/house2-floorplan.jpg"
+    "floorPlan": "images/house2-floorplan.jpg"
   },
   {
     "id": 4,
@@ -78,16 +78,16 @@
     "title": "3 Bedroom City Flat",
     "shortDescription": "A vibrant city flat with three bedrooms, located close to shops, cafés, and entertainment. Perfect for people who enjoy fast-paced city living with everything within walking distance.",
     "images": [
-      "/images/flat2-1.jpeg",
-      "/images/flat2-2.jpg",
-      "/images/flat2-3.jpg",
-      "/images/flat2-4.jpg",
-      "/images/flat2-5.jpg",
-      "/images/flat2-6.jpg",
-      "/images/flat2-7.jpg",
-      "/images/flat2-8.jpg"
+      "images/flat2-1.jpeg",
+      "images/flat2-2.jpg",
+      "images/flat2-3.jpg",
+      "images/flat2-4.jpg",
+      "images/flat2-5.jpg",
+      "images/flat2-6.jpg",
+      "images/flat2-7.jpg",
+      "images/flat2-8.jpg"
     ],
-    "floorPlan": "/images/flat2-floorplan.jpg"
+    "floorPlan": "images/flat2-floorplan.jpg"
   },
   {
     "id": 5,
@@ -101,16 +101,16 @@
     "title": "Luxury 5 Bedroom House",
     "shortDescription": "A high-end luxury home with five spacious bedrooms, modern interiors, and premium finishes throughout. Designed for comfort and elegance, offering an upscale and sophisticated lifestyle.",
     "images": [
-      "/images/house3-1.jpeg",
-      "/images/house3-2.jpg",
-      "/images/house3-3.jpg",
-      "/images/house3-4.jpg",
-      "/images/house3-5.jpg",
-      "/images/house3-6.jpg",
-      "/images/house3-7.jpg",
-      "/images/house3-8.jpg"
+      "images/house3-1.jpeg",
+      "images/house3-2.jpg",
+      "images/house3-3.jpg",
+      "images/house3-4.jpg",
+      "images/house3-5.jpg",
+      "images/house3-6.jpg",
+      "images/house3-7.jpg",
+      "images/house3-8.jpg"
     ],
-    "floorPlan": "/images/house3-floorplan.jpg"
+    "floorPlan": "images/house3-floorplan.jpg"
   },
   {
     "id": 6,
@@ -124,15 +124,15 @@
     "title": "1 Bedroom Studio Flat",
     "shortDescription": "A compact and cozy studio flat with smart use of space, ideal for students or single professionals. Offers a simple, low-maintenance living experience in a convenient location.",
     "images": [
-      "/images/flat3-1.jpeg",
-      "/images/flat3-2.jpg",
-      "/images/flat3-3.jpg",
-      "/images/flat3-4.jpg",
-      "/images/flat3-5.jpg",
-      "/images/flat3-6.jpg",
-      "/images/flat3-7.jpg"
+      "images/flat3-1.jpeg",
+      "images/flat3-2.jpg",
+      "images/flat3-3.jpg",
+      "images/flat3-4.jpg",
+      "images/flat3-5.jpg",
+      "images/flat3-6.jpg",
+      "images/flat3-7.jpg"
     ],
-    "floorPlan": "/images/flat3-floorplan.jpg"
+    "floorPlan": "images/flat3-floorplan.jpg"
   },
   {
     "id": 7,
@@ -146,14 +146,14 @@
     "title": "3 Bedroom Semi-Detached House",
     "shortDescription": "A comfortable semi-detached home with three bedrooms, offering a balance of privacy and community living. Ideal for families seeking a calm neighbourhood with a friendly atmosphere.",
     "images": [
-      "/images/house4-1.jpeg",
-      "/images/house4-2.jpg",
-      "/images/house4-3.jpg",
-      "/images/house4-4.jpg",
-      "/images/house4-5.jpg",
-      "/images/house4-6.jpg",
-      "/images/house4-7.jpg"
+      "images/house4-1.jpeg",
+      "images/house4-2.jpg",
+      "images/house4-3.jpg",
+      "images/house4-4.jpg",
+      "images/house4-5.jpg",
+      "images/house4-6.jpg",
+      "images/house4-7.jpg"
     ],
-    "floorPlan": "/images/house4-floorplan.jpg"
+    "floorPlan": "images/house4-floorplan.jpg"
   }
 ]
